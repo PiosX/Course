@@ -3,26 +3,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         
         <?php
-                if (isset($_GET['page']))
-                {
-                    $allowed_pages = array("java", "php", "mysql");
-
-                    $page = filter_var($_GET['page'], FILTER_SANITIZE_STRING);           
-
-                    if (!empty($page))
-                    {
-                        if (in_array($page, $allowed_pages))                       
-                        {
-                            if (is_file($page.".php"))
-                                include($page.".php");              
-                        }
-                    }                   
-                }
-                else                
-                    include ("start.php");                  
-                
-                    
-                echo "<title>$title</title>";
+                sprawdz(".php",1);
         ?>
         
         
@@ -43,29 +24,51 @@
             <div id="content">     
                 <div id="text">
         <?php
-        if (isset($_GET['page']))
+        function sprawdz($check, $value)
         {
-            $allowed_pages = array("java", "php", "mysql");
-            
-            $page = filter_var($_GET['page'], FILTER_SANITIZE_STRING);           
-            
-            if (!empty($page))
-            {
-                if (!in_array($page, $allowed_pages))
-                 echo "Taka strona nie istnieje";
-                else
+            $check = array(".html", ".php");
+
+            if($check!=(".html" || ".php")){
+                echo "Niepoprawny wybór";
+            }else{
+                if (isset($_GET['page']))
                 {
-                    if (is_file($page.".html"))
-                        include($page.".html");
+                    $allowed_pages = array("java", "php", "mysql");
+            
+                    $page = filter_var($_GET['page'], FILTER_SANITIZE_STRING);           
+            
+                if (!empty($page))
+                {
+                    if (!in_array($page, $allowed_pages)){
+                        if($value == 0)
+                            echo "Taka strona nie istnieje";
+                        else
+                            echo "";
+                    }         
                     else
-                        echo "Taka strona nie istnieje";
+                    {
+                        if (is_file($page.$check[$value]))
+                            include($page.$check[$value]);
+                        else
+                        {
+                            if($value == 0)
+                                echo "Taka strona nie istnieje";
+                            else
+                                echo "";
+                        }     
+                    }
+                }
+            
+                }else{
+                        include("start.html");
+                }
+                if($value == 1)
+                {
+                    echo "<title>$title</title>";
                 }
             }
-            
         }
-        else  
-           include("start.html");
-
+        sprawdz(".html",0);
         ?>
                </div>
            </div>
