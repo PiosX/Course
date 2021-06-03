@@ -1,0 +1,3 @@
+<?php 
+    $title = "MySQL";
+?>
