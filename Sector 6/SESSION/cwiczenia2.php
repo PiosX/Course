@@ -1,11 +1,11 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['initiate'])) //ktos moze sie phpsessionid zalogowac wiec trzeba sie zabezpieczyc
+    if(!isset($_SESSION['initiate']))
     {
-        session_regenerate_id(); //tworzy inna sesje
-        $new_session_id = session_id(); //pobieranie id nowej sesji
-        session_write_close(); //zamykanie obu sesji
+        session_regenerate_id();
+        $new_session_id = session_id();
+        session_write_close();
         session_id($new_session_id);
         session_start();
         $_SESSION['initiate'] = 1;
@@ -22,25 +22,25 @@
 </head>
 <body>
     <?php
-        if(isset($_GET['akcja']) && $_GET['akcja'] == "wyloguj")
-        {
-            $_SESSION['zalogowany'] = 0;
-            session_destroy();
-            echo "Zostałeś wylogowany";
-        }
         if((time()-$_SESSION['time'] > 10*60) && $_SESSION['zalogowany'] == 1)
         {
             $_SESSION['zalogowany'] = 0;
             session_destroy();
-            echo "Zbyt długa nieaktywność. Prosimy o ponowne zalogowanie się.<br />";
+            echo "Zostałeś wylogowany z powodu braku aktywności.";
         }
-        if($_SESSION['zalogowany'] == 1 && ($_SESSION['info_o_komp'] != $_SERVER['HTTP_USER_AGENT']))
+        if(isset($_GET['akcja']) && $_GET['akcja'] == "wyloguj")
         {
             $_SESSION['zalogowany'] = 0;
             session_destroy();
-            echo "Prosimy o ponowne zalogowanie się. Zmiana przeglądarki.";
+            echo "Zostałeś wylogowany.";
         }
-        if(isset($_POST['login']) && isset($_POST['haslo']) || $_SESSION['zalogowany'] == 1)
+        if($_SESSION['zalogowany'] == 1 && $_SESSION['info_o_komp'] != $_SERVER['HTTP_USER_AGENT'])
+        {
+            $_SESSION['zalogowany'] == 0;
+            session_destroy();
+            echo "Zostałeś wylogowany z powodu zmiany przegladarki lub komputera.";
+        }
+        if((isset($_POST['login']) && isset($_POST['haslo'])) || $_SESSION['zalogowany'] == 1)
         {
             if((!empty($_POST['login']) && !empty($_POST['haslo'])) || $_SESSION['zalogowany'] == 1)
             {
@@ -50,30 +50,30 @@
                     $haslo = filter_var($_POST['haslo'], FILTER_SANITIZE_STRING);
                 }
                 
-
                 if(($login == "Armon" && $haslo == "abc") || $_SESSION['zalogowany'] == 1)
                 {
                     if($_SESSION['zalogowany'] == 0)
                         $_SESSION['login'] = $login;
 
-                    echo "Gratulacje zalogowałeś się na konto: ".$_SESSION['login']."<br />";
+                    echo "Witaj na stronie: ".$_SESSION['login']."<br />";
                     echo "PANEL ADMINISTRACYJNY<br />";
-                    echo "<a href='cwiczenia.php'>Odśwież</a><br />";
-                    echo "<a href='cwiczenia.php?akcja=wyloguj'>Wyloguj</a>";
+                    echo "<a href='cwiczenia2.php'>Odśwież</a><br />";
+                    echo "<a href='cwiczenia2.php?akcja=wyloguj'>Wyloguj</a><br />";
+
                     $_SESSION['zalogowany'] = 1;
                     $_SESSION['time'] = time();
                     $_SESSION['info_o_komp'] = $_SERVER['HTTP_USER_AGENT'];
                 }else{
-                    echo "Zły login lub hasło. Spróbuj ponownie <a href='cwiczenia.php'>tutaj</a>";
+                    echo "Niepoprawny login lub hasło. Prosimy spróbować jeszcze raz <a href='cwiczenia2.php'>tutaj</a>.";
                 }
             }else{
-                echo "Nie podałeś loginu lub hasła. Spróbuj ponownie <a href='cwiczenia.php'>tutaj</a>";
+                echo "Nie podano loginu lub hasła. Prosimy spróbować jeszcze raz <a href='cwiczenia2.php'>tutaj</a>.";
             }
         }
         if($_SESSION['zalogowany'] == 0)
         {
     ?>
-    <form action="cwiczenia.php" method="post" enctype="multipart/form-data">
+    <form action="cwiczenia2.php" method="post" enctype="multipart/form-data">
         <div>
             <div>
                 Login: <input type="text" name="login" maxlength="8" size="5" />
