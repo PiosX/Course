@@ -8,7 +8,7 @@
         if(!isset($_COOKIE['ref']))
         {
             $_COOKIE['ref'] = $ref;
-            setcookie("ref", $ref, time()+60*60*24*30*3, "/");
+            setcookie('ref', $ref, time()+60*60*24*30*3, "/");
         }
     }
 
@@ -75,7 +75,6 @@
                     if(isset($_COOKIE['ref']))
                     {
                         $ref = filter_var($_COOKIE['ref'], FILTER_SANITIZE_STRING);
-
                         if($ref == "kazik")
                         {
                             $_COOKIE['ref'] = NULL;
