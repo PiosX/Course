@@ -1,3 +1,9 @@
+<?php
+        setcookie('FirstTime', 1, time()+10);
+
+        ob_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +19,9 @@
 
         if($wskaznik)
         {
+            if(!isset($_COOKIE['FirstTime']))
+            {
+
             //$wypisz = fread($wskaznik, filesize($nazwaPliku));
             //echo $wypisz;
 
@@ -25,6 +34,8 @@
             fwrite($wskaznik, $licznik);
 
             echo $licznik;
+            echo "Witaj nowy użytkowniku.";
+            }
         }else{
             echo "Nie ma takiego pliku.";
         }
@@ -33,3 +44,7 @@
     ?>
 </body>
 </html>
+
+<?php
+    ob_end_flush();
+?>
