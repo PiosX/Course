@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-        require_once("AnimalAbstract.php");
+        /*require_once("AnimalAbstract.php");
         require_once("Dog.php");
         require_once("Cat.php");
 
@@ -18,7 +18,14 @@
 
         $p2 = new Cat();
         $p2->eat("fish");
-        $p2->eat("fish");
+        $p2->eat("fish");*/
+
+        require_once("ExampleAbstract.php");
+        require_once("Delphin.php");
+
+        $c = new Delphin();
+
+        echo $c->eat("fish");
     ?>
 </body>
 </html>
