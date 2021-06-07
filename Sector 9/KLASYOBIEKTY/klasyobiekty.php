@@ -34,12 +34,10 @@
         require_once("class.cwiczenia.php");
 
         $a = new Cwiczenia();
-        $b = new Cwiczenia("America/Atka");
+        $b = new Cwiczenia("Australia/Yancowinna");
 
-        echo $a->setFutureTime("5")."<br />";
-        echo $a->futureTime."<br />";
-
-        echo $b->getCurrentTime()."<br />";
+        echo $a->getCurrentTime()."<br />";
+        echo $b->setFutureTime("6")."<br />";
         echo $b;
     ?>
 </body>
