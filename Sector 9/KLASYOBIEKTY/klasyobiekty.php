@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+    /*
         require_once("class.time.php");
 
         $a = new Time();
@@ -29,6 +30,17 @@
         echo $a->futureTime."<br />";
         echo $a->timeZone."<br />";
         echo $b->timeZone."<br />";
+    */
+        require_once("class.cwiczenia.php");
+
+        $a = new Cwiczenia();
+        $b = new Cwiczenia("America/Atka");
+
+        echo $a->setFutureTime("5")."<br />";
+        echo $a->futureTime."<br />";
+
+        echo $b->getCurrentTime()."<br />";
+        echo $b;
     ?>
 </body>
 </html>

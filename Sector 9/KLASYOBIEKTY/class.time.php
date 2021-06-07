@@ -11,7 +11,7 @@ class Time
     public $timeZone;
     function __construct($timeZone=self::DEFAULT_TIME_ZONE)//odwoływanie się do siebie self:: zeby moc sie odwolac do stalej
     {
-        $this->timeZone = $timeZone;
+        $this->timeZone = $timeZone; //odwoływanie sie publicznego timezone do tego timezone z funkcji
         date_default_timezone_set($this->timeZone);
         $this->currentTime = $this->getCurrentTime();
     }
