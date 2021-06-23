@@ -24,6 +24,7 @@
         //UCASE() -> zwraca stringa jako duze litery
         //LCASE() -> zwraca stringa jako male litery
         //trim() -> chroni przed tym zeby uzytkownik nie dawal spacji np. w loginie
+        //ltrim() rtrim()
         $result = mysqli_query($conn, $query) or die("Błąd zapytania");
 
         if(mysqli_num_rows($result)>0)
