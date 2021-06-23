@@ -12,6 +12,35 @@
         $conn = @mysqli_connect("localhost", "root", "", "kursmysql") or die(mysqli_connect_error());
 
         mysqli_set_charset($conn, "utf8");
+        /*
+           * SELECT @@event_scheduler; - sprawdzenie czy event scheduler jest włączony
+           * 
+           * SET GLOBAL event_scheduler = 1; - włączenie event schedulera 
+           * 
+           * CREATE EVENT event_name
+           * ON SCHEDULE
+           *  AT timestamp
+           * DO
+           *  sql_statement;
+           * 
+           * CREATE EVENT event_name
+           * ON SCHEDULE
+           *  EVERY amount
+           *    {SECOND|MINUTE|HOUR|DAY|MONTH|YEAR|WEEK}
+           * DO
+           *  sql_statement;* 
+           * 
+           * CREATE EVENT event_name
+           * ON SCHEDULE {EVERY|AT}...
+           * 
+           * [ON COMPLETION [NOT] PRESERVE]
+           * [STARTS {timestamp}]
+           * [ENDS {timestamp}]
+           * 
+           * DO
+           *    sql_statement;
+           *
+           */
         
         $query = "
             
