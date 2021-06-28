@@ -8,8 +8,7 @@
 </head>
 <body>
     <form action="cwiczenia.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <input type="hidden" name="MAX_FILE_SIZE" value="30720" />
+        <div>      
             <input type="file" name="plik" />
             <input type="submit" value="Dodaj plik" />
         </div>
@@ -30,16 +29,16 @@
                     }
                     break;
                 case 1:
-                    echo "Error";
+                    echo "Error 1";
                     break;
                 case 2:
-                    echo "Error";
+                    echo "Error 2";
                     break;
                 case 3:
-                    echo "Error";
+                    echo "Error 3";
                     break;
                 case 4:
-                    echo "Error";
+                    echo "Error 4";
                     break;
                 default:
                     echo "Error#";
